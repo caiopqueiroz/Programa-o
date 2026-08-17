@@ -7,7 +7,7 @@ int main(){
     printf("Digite um numero inteiro para o raio do circulo:\n");
     scanf("%d", &raio);
     // Área = pi*r**2
-    float area_circulo = 3.14 * (raio**2);
+    float area_circulo = 3.14 * (raio * raio);
     printf("Area do circulo: %f", area_circulo);
     return 0;
 }
