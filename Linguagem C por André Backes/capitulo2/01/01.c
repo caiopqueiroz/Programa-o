@@ -14,12 +14,11 @@ int main(){
     char caractere = 'C';
     printf("Agora estou exibindo essa letra: %c\nE esse numero: %d\n", caractere, numero);
 
-    // Exibindo 3 tipos de variáveis: %i - número inteiro / %c - caractere / %s - cadeia de caracteres (palavras) / %f - número real
+    // Exibindo 3 tipos de variáveis: %i - número inteiro / %c - caractere / %f - número real
     int numero_inteiro = 2;
     char letra = 'J';
-    char nome = "Julia";
     float numero_real = 5.6;
-    printf("Numero inteiro: %i\n1 caractere: %c\nPalavra: %s\nNumero real: %f", numero_inteiro, letra, nome, numero_real);
+    printf("Numero inteiro: %d\n1 caractere: %c\nNumero real: %f\n", numero_inteiro, letra, numero_real);
 
     system("pause");
     return 0;
