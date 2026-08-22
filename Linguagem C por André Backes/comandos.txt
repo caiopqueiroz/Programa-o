@@ -1,0 +1,11 @@
+lista de funções vistas em C:
+
+system("pause");
+
+printf("", );
+
+scanf("", &);
+
+putchar();
+
+getchar();
