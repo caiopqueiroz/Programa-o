@@ -8,6 +8,6 @@ int main(){
     printf("Agora digite a porcentagem de juros: ");
     scanf("%f", &porcentagem_juros);
     float montante_final = capital_investido * (1 + porcentagem_juros);
-    printf("\nO seu montante final depois de 1 ano ira ser R$%f", montante_final);
+    printf("\nO seu montante final depois de 1 ano ira ser R$%.2f", montante_final);
     return 0;
 }
