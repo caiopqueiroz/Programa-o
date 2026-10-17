@@ -1,8 +1,8 @@
 # include <stdio.h>
 
 int main() {
-    int linhas = 10;
-    int colunas = 10;
+    int linhas = 3;
+    int colunas = 3;
     int matriz[linhas][colunas];
 
     for (int linha = 0; linha < linhas; linha++) {
@@ -14,16 +14,10 @@ int main() {
         }
     }
 
-    printf("\n");
-    for (int linha = 0; linha < linhas; linha++) {
+    int nova_matriz[linhas][colunas];
 
-        for (int coluna = 0; coluna < colunas; coluna++)  {
-
-            printf("%d ", matriz[linha][coluna]);
-        }
-
-        printf("\n");
-    }
+    int linha_nova = 0;
+    int coluna_nova = 0;
 
     // trocar a segunda linha pela oitava linha
     // exemplo: trocando a primeira pela segunda
@@ -37,58 +31,89 @@ int main() {
         for (int coluna = 0; coluna < colunas; coluna++) {
 
             // if linha == 1
-            if (linha == 1) {
+            if (linha == 0) {
                 // linha = 7
-                linha = 7;
-                printf("%d ", matriz[linha][coluna]);
                 linha = 1;
+                nova_matriz[linha_nova][coluna_nova] = matriz[linha][coluna];
+                linha = 0;
                 // linha = 1
             // else if linha == 7
-            } else if (linha == 7) {
+            } else if (linha == 1) {
                 // linha = 1
+                linha = 0;
+                nova_matriz[linha_nova][coluna_nova] = matriz[linha][coluna];
                 linha = 1;
-                printf("%d ", matriz[linha][coluna]);
-                linha = 7;
                 // linha = 7
             } else {
 
-                printf("%d ", matriz[linha][coluna]);
+                nova_matriz[linha_nova][coluna_nova] = matriz[linha][coluna];
             }
+
+            printf("%d ", nova_matriz[linha_nova][coluna_nova]);
+
+            coluna_nova++;
         }
 
         printf("\n");
+
+        linha_nova++;
+
+        coluna_nova = 0;
     }
+
+    linha_nova = 0;
+    coluna_nova = 0;
 
     printf("\n");
     for (int linha = 0; linha < linhas; linha++) {
 
         for (int coluna = 0; coluna < colunas; coluna++) {
 
-            if (coluna == 3) {
+            if (coluna == 0) {
 
-                coluna = 9;
-                printf("%d ", matriz[linha][coluna]);
-                coluna = 3;
-            } else if (coluna == 9) {
+                coluna = 1;
+                matriz[linha_nova][coluna_nova] = nova_matriz[linha][coluna];
+                coluna = 0;
+            } else if (coluna == 1) {
 
-                coluna = 3;
-                printf("%d ", matriz[linha][coluna]);
-                coluna = 9;
+                coluna = 0;
+                matriz[linha_nova][coluna_nova] = nova_matriz[linha][coluna];
+                coluna = 1;
+            } else {
+
+                matriz[linha_nova][coluna_nova] = nova_matriz[linha][coluna];
+            }
+
+            printf("%d ", matriz[linha_nova][coluna_nova]);
+
+            coluna_nova++;
+        }
+
+        printf("\n");
+
+        linha_nova++;
+
+        coluna_nova = 0;
+    }
+
+    int novo_indice = colunas - 1;
+
+    printf("\n");
+    for (int linha = 0; linha < linhas; linha++) {
+
+        for (int coluna = 0; coluna < colunas; coluna++) {
+
+            if (linha == coluna) {
+
+                printf("%d ", matriz[linha][novo_indice]);
+                novo_indice--;
+            } else if (linha + coluna == (linhas - 1)) {
+
+                printf("%d ", matriz[linha][linha]);
             } else {
 
                 printf("%d ", matriz[linha][coluna]);
             }
-        }
-
-        printf("\n");
-    }
-
-    printf("\n");
-    for (int coluna = 0; coluna < colunas; coluna++) {
-
-        for (int linha = 0; linha < linhas; linha++) {
-
-            printf("%d ", matriz[linha][coluna]);
         }
 
         printf("\n");
