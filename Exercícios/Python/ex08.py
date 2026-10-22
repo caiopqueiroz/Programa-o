@@ -6,16 +6,35 @@ numeros = list()
 
 numeros_ordenados  = list()
 
-for numero in range(0, 3):
+for numero in range(0, 10):
 
     numeros.append(int(input('Digite um número inteiro: ')))
-    
-#for numero in numeros:
-    
-    #print(numero)
 
-#print()
+copia_numeros = numeros[:]
 
-#for numero in numeros_ordenados:
+menor = 0
 
-    #print(numero)
+contador = 0
+
+for contador_principal in range(0, 10):
+
+    for numero in numeros:
+
+        if contador == 0:
+
+            menor = numeros[contador]
+        else:
+            
+            if numeros[contador] < menor:
+
+                menor =  numeros[contador]
+
+        contador += 1
+
+    numeros_ordenados.append(menor)
+    numeros.remove(menor)
+
+    contador = 0
+
+print(copia_numeros)
+print(numeros_ordenados)
