@@ -12,7 +12,7 @@
 
 # impedir saídas impossíveis
 
-# tratar código de produto inexistente -> criar um novo
+# tratar código de produto inexistente 
 
 from random import randint 
 
@@ -34,20 +34,26 @@ for valor in range(0, 8):
 
     quantidades.append(randint(0, 50))
 
-print(codigos[0])
+#print(codigos[0])
 
 # criando o menu
 
-print('-- MENU --')
-print('1 ) Consultar pelo código\n2 ) Registrar entrada\n3 ) Registrar saída\n4 ) Ver estoque\n5 ) Ver produtos com pouco estoque')
-
 while True:
 
+    print('\n-- MENU --')
+    print('1 ) Consultar pelo código\n2 ) Registrar entrada\n3 ) Registrar saída\n4 ) Ver estoque\n5 ) Ver produtos com pouco estoque')
     comando = -1
 
     while comando not in range(0, 6):
         
-        comando = int(input('Digite a opção: ')) 
+        comando = int(input('Digite a opção: '))
+        print()
+
+    if comando == 0:
+
+        print('-- FIM --')
+
+        break 
 
     if comando == 1:
 
@@ -102,6 +108,84 @@ while True:
         if not existe:
 
             print('Código inexistente')
+
+    if comando == 3:
+
+        # registrar saída 
+
+        codigo = int(input("Digite o código do produto: "))
+
+        existe = False
+
+        contador = 0
+
+        venda = 0
+
+        for valor in codigos:
+
+            if valor == codigo:
+
+                existe = True
+
+                venda = int(input("Qual a quantidade retirada? "))
+
+                if (quantidades[contador] - venda) >= 0:
+                
+                    quantidades[contador] -= venda
+
+                    print(f'Cód {codigo} | Quant. {quantidades[contador]} |')
+                else:
+
+                    print('Estoque insuficiente')
+
+            contador += 1
+
+        if not existe:
+
+            print("Código inválido")
+
+    if comando == 4:
+
+        # ver estoque 
+
+        print('Cód ', end='')
+        for codigo in codigos:
+
+            print(f'{codigo}\t', end='|')
+
+        print()
+
+        print('Q.  ', end='')
+        for valor in quantidades:
+
+            print(f'{valor}\t', end='|')
+
+        print()
+
+    if comando == 5:
+
+        contador = 0
+
+        print('Cód ', end='')
+        for codigo in codigos:
+
+            if (quantidades[contador] <= 5):
+                
+                print(f'{codigo}\t', end='|')
+
+            contador += 1
+
+        print()
+
+        print('Q.  ', end='')
+        for valor in quantidades:
+
+            if valor <= 5:
+                
+                print(f'{valor}\t', end='|')
+
+        print()
+
 
 
 #for valor in quantidades:
