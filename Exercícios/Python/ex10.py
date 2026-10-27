@@ -43,6 +43,8 @@ def jogada_x(matriz):
 
     comando = list()
 
+    # Impedir jogadas impossíveis - como linha 3 coluna 3 
+
     for valor in ['linha', 'coluna']:
 
         comando.append(int(input(f'Valor {valor}: ')))
@@ -53,9 +55,15 @@ def jogada_x(matriz):
 
             if (comando[0] == linha) and (comando[1] == coluna):
 
-                matriz[linha][coluna] = 'X'
+                if matriz[linha][coluna] == '-':
+                    
+                    matriz[linha][coluna] = 'X'
+                else:
 
-        print()
+                    print('JOGADA IMPOSSÍVEL')
+                    jogada_x(matriz)
+
+        #print()
 
     return matriz
 
@@ -73,17 +81,112 @@ def jogada_o(matriz):
 
             if (comando[0] == linha) and (comando[1] == coluna):
 
-                matriz[linha][coluna] = 'O'
+                if matriz[linha][coluna] == '-':
+                    
+                    matriz[linha][coluna] = 'O'
+                else:
 
-        print()
+                    print('POSIÇÃO JÁ OCUPADA')
+                    jogada_o(matriz)
+
+        #print()
 
     return matriz
 
+def verificar_vitoria(matriz):
+
+    vetor = list()
+
+    venceu = False
+    vencedor = ''
+
+    for linha in range(0, 3):
+
+        for coluna in range(0, 3):
+
+            vetor.append(matriz[linha][coluna])
+
+        if vetor == ['X', 'X', 'X']:
+
+            venceu = True
+            vencedor = 'X'
+        elif vetor == ['O', 'O', 'O']:
+
+            venceu = True
+            vencedor = 'O'
+
+        vetor.clear()
+
+    for coluna in range(0, 3):
+    
+        for linha in range(0, 3):
+
+            vetor.append(matriz[linha][coluna])
+
+        if vetor == ['X', 'X', 'X']:
+
+            venceu = True
+            vencedor = 'X'
+        elif vetor == ['O', 'O', 'O']:
+
+            venceu = True
+            vencedor = 'O'
+
+        vetor.clear()
+
+    for linha in range(0, 3):
+
+        for coluna in range(0, 3):
+
+            if linha == coluna:
+
+                vetor.append(matriz[linha][coluna])
+
+        if linha == 2:
+
+            if vetor == ['X', 'X', 'X']:
+            
+                venceu = True
+                vencedor = 'X'
+            elif vetor == ['O', 'O', 'O']:
+    
+                venceu = True
+                vencedor = 'O'
+
+            vetor.clear()
+
+    for linha in range(0, 3):
+    
+        for coluna in range(0, 3):
+
+            if linha + coluna == 2:
+
+                vetor.append(matriz[linha][coluna])
+
+        if linha == 2:
+
+            if vetor == ['X', 'X', 'X']:
+            
+                venceu = True
+                vencedor = 'X'
+            elif vetor == ['O', 'O', 'O']:
+    
+                venceu = True
+                vencedor = 'O'
+
+            vetor.clear()
+
+    return vencedor
+
 exibir_matriz(matriz)
+
+vencedor = ''
+
+contador = 0
 
 for jogada in range(0, 9):
 
-    if jogada % 2 == 0:
+    if contador % 2 == 0:
 
         print('Jogada do X:')
 
@@ -95,3 +198,17 @@ for jogada in range(0, 9):
 
         jogada_o(matriz)
         exibir_matriz(matriz)
+
+    vencedor = verificar_vitoria(matriz)
+
+    if vencedor != '':
+
+        print(f'O jogador {vencedor} venceu! FIM DO JOGO')
+
+        break
+
+    contador += 1
+
+if contador == 9:
+
+    print('Empate! DEU VELHA')
