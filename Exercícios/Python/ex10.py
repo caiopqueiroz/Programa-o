@@ -21,6 +21,8 @@
 
 #    print()
 
+from rich import print
+
 matriz = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
 
 def exibir_matriz(matriz):
@@ -43,11 +45,19 @@ def jogada_x(matriz):
 
     comando = list()
 
-    # Impedir jogadas impossíveis - como linha 3 coluna 3 
-
     for valor in ['linha', 'coluna']:
-
+        
         comando.append(int(input(f'Valor {valor}: ')))
+
+    while comando[0] not in [0, 1, 2] or comando[1] not in [0, 1, 2]:
+
+        print('[bold red]JOGADA IMPOSSÍVEL. TENTE DE NOVO[bold red]')
+
+        comando.clear()
+        
+        for valor in ['linha', 'coluna']:
+
+            comando.append(int(input(f'Valor {valor}: ')))
 
     for linha in range(0, 3):
 
@@ -57,10 +67,10 @@ def jogada_x(matriz):
 
                 if matriz[linha][coluna] == '-':
                     
-                    matriz[linha][coluna] = 'X'
+                    matriz[linha][coluna] = '[bold green]X[bold green]'
                 else:
 
-                    print('JOGADA IMPOSSÍVEL')
+                    print('[bold red]JOGADA IMPOSSÍVEL. TENTE DE NOVO[bold red]')
                     jogada_x(matriz)
 
         #print()
@@ -75,6 +85,16 @@ def jogada_o(matriz):
 
         comando.append(int(input(f'Valor {valor}: ')))
 
+    while comando[0] not in [0, 1, 2] or comando[1] not in [0, 1, 2]:
+
+        print('[bold red]JOGADA IMPOSSÍVEL. TENTE DE NOVO[bold red]')
+        
+        comando.clear()
+
+        for valor in ['linha', 'coluna']:
+
+            comando.append(int(input(f'Valor {valor}: ')))
+
     for linha in range(0, 3):
 
         for coluna in range(0, 3):
@@ -83,10 +103,10 @@ def jogada_o(matriz):
 
                 if matriz[linha][coluna] == '-':
                     
-                    matriz[linha][coluna] = 'O'
+                    matriz[linha][coluna] = '[bold purple]O[bold purple]'
                 else:
 
-                    print('POSIÇÃO JÁ OCUPADA')
+                    print('[bold red]JOGADA IMPOSSÍVEL. TENTE DE NOVO[bold red]')
                     jogada_o(matriz)
 
         #print()
@@ -106,11 +126,11 @@ def verificar_vitoria(matriz):
 
             vetor.append(matriz[linha][coluna])
 
-        if vetor == ['X', 'X', 'X']:
+        if vetor == ['[bold green]X[bold green]', '[bold green]X[bold green]', '[bold green]X[bold green]']:
 
             venceu = True
             vencedor = 'X'
-        elif vetor == ['O', 'O', 'O']:
+        elif vetor == ['[bold purple]O[bold purple]', '[bold purple]O[bold purple]', '[bold purple]O[bold purple]']:
 
             venceu = True
             vencedor = 'O'
@@ -123,11 +143,11 @@ def verificar_vitoria(matriz):
 
             vetor.append(matriz[linha][coluna])
 
-        if vetor == ['X', 'X', 'X']:
+        if vetor == ['[bold green]X[bold green]', '[bold green]X[bold green]', '[bold green]X[bold green]']:
 
             venceu = True
             vencedor = 'X'
-        elif vetor == ['O', 'O', 'O']:
+        elif vetor == ['[bold purple]O[bold purple]', '[bold purple]O[bold purple]', '[bold purple]O[bold purple]']:
 
             venceu = True
             vencedor = 'O'
@@ -144,11 +164,11 @@ def verificar_vitoria(matriz):
 
         if linha == 2:
 
-            if vetor == ['X', 'X', 'X']:
+            if vetor == ['[bold green]X[bold green]', '[bold green]X[bold green]', '[bold green]X[bold green]']:
             
                 venceu = True
                 vencedor = 'X'
-            elif vetor == ['O', 'O', 'O']:
+            elif vetor == ['[bold purple]O[bold purple]', '[bold purple]O[bold purple]', '[bold purple]O[bold purple]']:
     
                 venceu = True
                 vencedor = 'O'
@@ -165,11 +185,11 @@ def verificar_vitoria(matriz):
 
         if linha == 2:
 
-            if vetor == ['X', 'X', 'X']:
+            if vetor == ['[bold green]X[bold green]', '[bold green]X[bold green]', '[bold green]X[bold green]']:
             
                 venceu = True
                 vencedor = 'X'
-            elif vetor == ['O', 'O', 'O']:
+            elif vetor == ['[bold purple]O[bold purple]', '[bold purple]O[bold purple]', '[bold purple]O[bold purple]']:
     
                 venceu = True
                 vencedor = 'O'
@@ -178,37 +198,41 @@ def verificar_vitoria(matriz):
 
     return vencedor
 
-exibir_matriz(matriz)
+def jogo_da_velha(matriz):
 
-vencedor = ''
+    exibir_matriz(matriz)
 
-contador = 0
+    vencedor = ''
 
-for jogada in range(0, 9):
+    contador = 0
 
-    if contador % 2 == 0:
+    for jogada in range(0, 9):
 
-        print('Jogada do X:')
+        if contador % 2 == 0:
 
-        jogada_x(matriz)
-        exibir_matriz(matriz)
-    else:
+            print('Jogada do X:')
 
-        print('Jogada do O:')
+            jogada_x(matriz)
+            exibir_matriz(matriz)
+        else:
 
-        jogada_o(matriz)
-        exibir_matriz(matriz)
+            print('Jogada do O:')
 
-    vencedor = verificar_vitoria(matriz)
+            jogada_o(matriz)
+            exibir_matriz(matriz)
 
-    if vencedor != '':
+        vencedor = verificar_vitoria(matriz)
 
-        print(f'O jogador {vencedor} venceu! FIM DO JOGO')
+        if vencedor != '':
 
-        break
+            print(f'O jogador {vencedor} venceu! FIM DO JOGO')
 
-    contador += 1
+            break
 
-if contador == 9:
+        contador += 1
 
-    print('Empate! DEU VELHA')
+    if contador == 9:
+
+        print('Empate! DEU VELHA')
+
+jogo_da_velha(matriz)
