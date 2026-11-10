@@ -2,19 +2,19 @@
 
 # armazenar em 2 vetores -> 1 para os códigos e 1 para as quantidades
 
-# criar um menu emunerado:
+# criar um menu enumerado:
 
 # 1 ) consultar pelo código
 # 2 ) registrar uma entrada de unidades
 # 3 ) saída de unidades
 # 4 ) exibir produtos e quantidades
-# 5 ) listar produtos com 5 ou menos unidades no estoque 
+# 5 ) listar produtos com 5 ou menos unidades no estoque
 
 # impedir saídas impossíveis
 
-# tratar código de produto inexistente 
+# tratar código de produto inexistente
 
-from random import randint 
+from random import randint
 
 codigos = list()
 
@@ -45,7 +45,7 @@ while True:
     comando = -1
 
     while comando not in range(0, 6):
-        
+
         comando = int(input('Digite a opção: '))
         print()
 
@@ -53,7 +53,7 @@ while True:
 
         print('-- FIM --')
 
-        break 
+        break
 
     if comando == 1:
 
@@ -70,7 +70,7 @@ while True:
             if codigo == valor:
 
                 existe = True
-                
+
                 print(f'Cód {codigo} | Quant. {quantidades[contador]} |')
 
             contador += 1
@@ -81,10 +81,10 @@ while True:
 
     if comando == 2:
 
-        # registrar entrada 
+        # registrar entrada
 
         codigo = int(input('Digite o código do produto: '))
-        
+
         contador = 0
 
         acrescimo = 0
@@ -111,7 +111,7 @@ while True:
 
     if comando == 3:
 
-        # registrar saída 
+        # registrar saída
 
         codigo = int(input("Digite o código do produto: "))
 
@@ -130,7 +130,7 @@ while True:
                 venda = int(input("Qual a quantidade retirada? "))
 
                 if (quantidades[contador] - venda) >= 0:
-                
+
                     quantidades[contador] -= venda
 
                     print(f'Cód {codigo} | Quant. {quantidades[contador]} |')
@@ -146,7 +146,7 @@ while True:
 
     if comando == 4:
 
-        # ver estoque 
+        # ver estoque
 
         print('Cód ', end='')
         for codigo in codigos:
@@ -170,7 +170,7 @@ while True:
         for codigo in codigos:
 
             if (quantidades[contador] <= 5):
-                
+
                 print(f'{codigo}\t', end='|')
 
             contador += 1
@@ -181,7 +181,7 @@ while True:
         for valor in quantidades:
 
             if valor <= 5:
-                
+
                 print(f'{valor}\t', end='|')
 
         print()
